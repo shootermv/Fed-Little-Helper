@@ -25,12 +25,12 @@ Usage
 Background
 ===
 
-Most of us familiar with follwoing situation: It is your first day at new place as Front End.__
-Teamleader explains you what need to be done.__
-It is your first task here and it is looks pretty easy...__
-Alas! It cames out that server not ready yet.__
-Or - no proper data can be found on your machine (and you dont know how to generate it)__
-`So, it looks like you have no choise but sit and wait until someone will do something to make you able to work...`__
+Most of us familiar with follwoing situation: It is your first day at new place as Front End.  
+Teamleader explains you what need to be done.  
+It is your first task here and it is looks pretty easy...  
+Alas! It cames out that server not ready yet.  
+Or - no proper data can be found on your machine (and you dont know how to generate it)  
+`So, it looks like you have no choise but sit and wait until someone will do something to make you able to work...`  
 Wait a minute! There is a way to do your job without be dependant on "real" server!
 
 You can use `Fed-Little-Helper` for quickly creating server wich serves mock json responses modified for your exact needs.
