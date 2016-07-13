@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="devLittlehelper">
+<head>
+	  <link rel="stylesheet" href="lib/css/materialize.min.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body  ng-controller="requestList">
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+	    <a id="logo-container" href="#" class="brand-logo">
+		    Fed Little Helper
+	    </a>
+      <a href="#" id="insertscript" ng-click="reisterRequests()" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="container">	
+		<ul class="collapsible" data-collapsible="accordion">
+
+			<li ng-repeat="request in requests">
+				<div class="collapsible-header">
+					<i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
+			  	<i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
+					{{request.request.url}}
+				</div>
+				<div class="collapsible-body">
+					  
+
+						<div class="row">
+							<div class="col s12">
+								<div class="card darken-1" style="margin:10px">
+									<div class="card-content">
+										<span class="card-title">Json</span>
+										<div>
+											<pre class="grey lighten-3">
+												{{request.json | json}}
+											</pre>
+										</div>
+									</div>
+<!--									<div class="card-action">
+									<a href="#">This is a link</a>
+									<a href="#">This is a link</a>
+									</div>-->
+								</div>
+							</div>
+						</div>
+
+						<div class="row" ng-if="request.request.postData" style="margin:10px">
+							<div class="col s12">
+								<div class="card darken-1">
+									<div class="card-content">
+										<span class="card-title">Post Data</span>
+										<div>
+											<pre class="grey lighten-3">
+												{{request.request.postData | json}}
+											</pre>
+										</div>
+									</div>
+	<!--								<div class="card-action">
+									<a href="#">This is a link</a>
+									<a href="#">This is a link</a>
+									</div>-->
+								</div>
+							</div>
+						</div>
+
+
+
+				</div>
+			</li>				
+		</ul>
+
+		<!--modal-->
+		<div id="modal1" class="modal bottom-sheet">
+			<div class="modal-content">
+			<h4>Modal Header</h4>
+			<p>A bunch of text</p>
+			</div>
+			<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
+		</div>
+
+
+   </div>
+	<!--<button id="executescript">Execute script in inspected page</button>
+	<button id="insertscript">Insert script into inspected page</button>
+	<button id="insertmessagebutton">Insert button to send a message from page to devtools</button>-->
+	<script src="angular.min.js"></script>
+	<script type="text/javascript" src="lib/js/jquery-2.1.1.min.js"></script>
+	<script src="messaging.js"></script>
+	<script src="panel.js"></script>
+	<script src="lib/js/materialize.js"></script>
+</body>
+</html>
