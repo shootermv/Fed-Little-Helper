@@ -1,9 +1,10 @@
 Fed Little Helper
 ===
 ![alt tag](https://github.com/shootermv/Fed-Little-Helper/blob/master/SantaLittleHelper.png)
-This is a small Chrome DevTools Extension that should help Fed quickly create mock server.
+===
+Chrome DevTools Extension that should help Fed quickly create mock server.
 
-#Installation
+Installation
 ===
 
  * Open [chrome://extensions](chrome://extensions)
