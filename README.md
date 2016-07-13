@@ -15,9 +15,24 @@ Installation
 Usage
 ===
 
-While on any page, launch the devtools, you should see a new tab called 'Fed Little Helper' which contains UI
+While application running, launch the devtools, you should see a new tab called 'Fed Little Helper', keep it open.
+Do the actions on the site which brings you to the view you need to create/modify the UI functionality.
+You will see all the requests recorded
+Modify the responses according to your needs
+Press "Export" Button To create mock server
+
 
 Background
 ===
 
-While working on a feature for [GhostStory](https://github.com/thingsinjars/GhostStory), I found myself trying to figure out how Chrome DevTools Extensions worked. Seeing as it took the best part of a day to actually get the basics in place (even using the [docs](http://developer.chrome.com/extensions/devtools.html) and [samples](http://developer.chrome.com/extensions/samples.html)), I figure it might help to have a working example.
+Familiar with follwoing situation: It is your first day at new place as Front End. 
+Teamleader explains you what need to be done.
+It is your first task here and it is looks pretty easy...
+Alas! It cames out that server not ready yet.
+Or - no proper data can be found on your machine (and you dont know how to generate it)
+`So, it looks like you have no choise but sit and wait until someone will do something to make you able to work...`
+Wait a minute! There is a way to do your job without be dependant on "real" server!
+
+You can use `Fed-Little-Helper` for quickly creating server wich serves mock json responses modified for your exact needs.
+
+ 
