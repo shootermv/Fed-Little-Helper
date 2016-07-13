@@ -1,7 +1,7 @@
 Fed Little Helper
 ===
 
-This is a small boilerplate project to be used as a starting point for developing a Chrome DevTools Extension.
+This is a small Chrome DevTools Extension that should help Fed quickly create mock server.
 
 Installation
 ===
