@@ -15,11 +15,11 @@ Installation
 Usage
 ===
 
-While application running, launch the devtools, you should see a new tab called 'Fed Little Helper', keep it open.
-Do the actions on the site which brings you to the view you need to create/modify the UI functionality.
-You will see all the requests recorded
-Modify the responses according to your needs
-Press "Export" Button To create mock server
+ * While application running, launch the devtools, you should see a new tab called 'Fed Little Helper', keep it open.
+ * Do the actions on the site which brings you to the view you need to create/modify the UI functionality.
+ * You will see all the requests recorded
+ * Modify the responses according to your needs
+ * Press "Export" Button To create mock server
 
 
 Background
