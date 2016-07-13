@@ -29,7 +29,24 @@ angular.module('devLittlehelper',[]).controller('requestList', requestList);
 function requestList($scope){
     $scope.requests = [];
     $scope.reisterRequests = function(){
-        sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
+        //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
+         $scope.routerCode = `
+         
+            'use strict';
+             let router = require('koa-router')();
+         
+         `;
+
+         $scope.requests.forEach(request => {
+            $scope.routerCode += `
+             router.get('${request.request.url.replace('http://localhost:9000','')}', function*() {                
+                this.body = ${JSON.stringify(request.json, null, 5)};
+             });`;
+         })
+         $scope.routerCode += `
+
+             module.exports = router;
+         `;
          $('#modal1').openModal();
     }
 
@@ -42,6 +59,7 @@ function requestList($scope){
             request.getContent(function(content, encoding) {
                 request.json = angular.fromJson(content);
                 $scope.requests.push(request);
+
                 $scope.$apply();
                 localStorage.setItem(request.request.url, content);
             });
