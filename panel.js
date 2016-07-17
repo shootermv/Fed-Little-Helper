@@ -7,7 +7,11 @@ function isJsonReq(request){
     let contentType = request.response.headers.find(header => header.name === "Content-Type")
     return contentType && /application\/json/.test(contentType.value);
 }
-
+function addTabsAtTheEnd(stringified){
+     let last = stringified[stringified.length-1];
+     stringified = stringified.slice(0,-1) + '\t\t' + last;
+     return stringified;
+}
 angular.module('devLittlehelper',[]).controller('requestList', requestList);
 function requestList($scope){
     $scope.requests = [];
@@ -21,10 +25,11 @@ function requestList($scope){
          `;
 
          $scope.requests.forEach(request => {
+            let stringified = addTabsAtTheEnd(JSON.stringify(request.json, null, '\t\t\t'));
             $scope.routerCode +=
             ` 
                 router.get('${request.request.url.replace('http://localhost:9000','')}', function*() {                
-                    this.body =  ${JSON.stringify(request.json, null, '\t').replace(']','\t\t\t]')};                   
+                    this.body =  ${stringified};                   
                 });
             `;
          })
@@ -40,7 +45,16 @@ function requestList($scope){
           $scope.requests.splice($scope.requests.indexOf(req), 1);
     }
 
-    
+    if(!chrome.devtools){//for run app inside browser (not as extension)
+      let requestt = {
+          request:{
+              method: 'GET',
+              url: 'http://localhost:9000/posts/Angular2',              
+          },
+          json: []
+      };
+      $scope.requests.push(requestt);
+    }
     chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {        
         var status = document.querySelector("#status");
         console.log(JSON.stringify(request, null, 5))
