@@ -3,23 +3,6 @@
 // Can use
 // chrome.devtools.*
 // chrome.extension.*
-
-/*
-document.querySelector('#executescript').addEventListener('click', function() {
-    sendObjectToInspectedPage({action: "code", content: "console.log('Inline script executed')"});
-}, false);
-
-document.querySelector('#insertscript').addEventListener('click', function() {
-    sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
-    
-}, false);
-
-document.querySelector('#insertmessagebutton').addEventListener('click', function() {
-    sendObjectToInspectedPage({action: "code", content: "document.body.innerHTML='<button>Send message to DevTools</button>'"});
-    sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
-}, false);
-*/
-
 function isJsonReq(request){
     let contentType = request.response.headers.find(header => header.name === "Content-Type")
     return contentType && /application\/json/.test(contentType.value);
@@ -30,21 +13,23 @@ function requestList($scope){
     $scope.requests = [];
     $scope.reisterRequests = function(){
         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
-         $scope.routerCode = `
-         
+         $scope.routerCode = 
+         `
             'use strict';
              let router = require('koa-router')();
          
          `;
 
          $scope.requests.forEach(request => {
-            $scope.routerCode += `
-             router.get('${request.request.url.replace('http://localhost:9000','')}', function*() {                
-                this.body = ${JSON.stringify(request.json, null, 5)};
-             });`;
+            $scope.routerCode +=
+            ` 
+                router.get('${request.request.url.replace('http://localhost:9000','')}', function*() {                
+                    this.body =  ${JSON.stringify(request.json, null, '\t').replace(']','\t\t\t]')};                   
+                });
+            `;
          })
-         $scope.routerCode += `
-
+         $scope.routerCode += 
+         `
              module.exports = router;
          `;
          $('#modal1').openModal();
@@ -60,14 +45,10 @@ function requestList($scope){
         var status = document.querySelector("#status");
         console.log(JSON.stringify(request, null, 5))
         if(isJsonReq(request)){
-             
-            //store in localstorage
             request.getContent(function(content, encoding) {
                 request.json = angular.fromJson(content);
                 $scope.requests.push(request);
-
                 $scope.$apply();
-                localStorage.setItem(request.request.url, content);
             });
             
         }
