@@ -18,10 +18,22 @@
 
 			<li ng-repeat="request in requests">
 				<div class="collapsible-header">
-					<i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
-			  	<i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
-					{{request.request.url}}
+					<div class="row">	
+						<div class="col s1">
+							<i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
+							<i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
+						</div>
+						<div class="col s10">	
+							{{request.request.url}}
+						</div>
+						<div class="col s1">
+							<a href="return false;" ng-click="removeRequest(request, $event); $event.stopPropagation();">
+							   <i class="material-icons right-align">close</i>	
+							</a>
+						</div>	
+					 </div>
 				</div>
+
 				<div class="collapsible-body">
 					  
 

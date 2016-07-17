@@ -50,7 +50,13 @@ function requestList($scope){
          $('#modal1').openModal();
     }
 
-    chrome.devtools.network.onRequestFinished.addListener(request => {        
+    $scope.removeRequest = function(req, $event) {
+          $event.preventDefault();
+          $scope.requests.splice($scope.requests.indexOf(req), 1);
+    }
+
+    
+    chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {        
         var status = document.querySelector("#status");
         console.log(JSON.stringify(request, null, 5))
         if(isJsonReq(request)){
