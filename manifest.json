@@ -1,7 +1,7 @@
 {
     "name": "FedLittleHelper",
     "version": "0.1",
-    "description": "A bare-bones example of communication between devtools and an inspected page",
+    "description": "Quickly create mock server for develpoing front end",
     "devtools_page": "devtools.html",
     "background": {
         "scripts": [
