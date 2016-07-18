@@ -1,5 +1,5 @@
 {
-    "name": "DevToolsPanel",
+    "name": "FedLittleHelper",
     "version": "0.1",
     "description": "A bare-bones example of communication between devtools and an inspected page",
     "devtools_page": "devtools.html",
@@ -7,6 +7,9 @@
         "scripts": [
             "background.js"
         ]
+    },
+    "browser_action": {
+      "default_icon": "SantaLittleHelper.png"
     },
     "permissions": [
         
