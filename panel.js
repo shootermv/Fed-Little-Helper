@@ -3,6 +3,8 @@
 // Can use
 // chrome.devtools.*
 // chrome.extension.*
+
+//Helpers
 function isJsonReq(request){
     let contentType = request.response.headers.find(header => header.name === "Content-Type")
     return contentType && /application\/json/.test(contentType.value);
@@ -12,11 +14,17 @@ function addTabsAtTheEnd(stringified){
      stringified = stringified.slice(0,-1) + '\t\t' + last;
      return stringified;
 }
+
+function removeReferer(request) {
+    let host = request.request.headers.find(header => header.name === "Referer");
+    request.request.url = request.request.url.replace(host.value, '/');
+}
+
 angular.module('devLittlehelper',[]).controller('requestList', requestList);
 function requestList($scope){
     $scope.requests = [];
     $scope.reisterRequests = function(){
-        //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
+         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
          $scope.routerCode = 
          `
             'use strict';
@@ -28,7 +36,7 @@ function requestList($scope){
             let stringified = addTabsAtTheEnd(JSON.stringify(request.json, null, '\t\t\t'));
             $scope.routerCode +=
             ` 
-                router.get('${request.request.url.replace('http://localhost:9000','')}', function*() {                
+                router.get('${request.request.url}', function*() {                
                     this.body =  ${stringified};                   
                 });
             `;
@@ -49,7 +57,7 @@ function requestList($scope){
       let requestt = {
           request:{
               method: 'GET',
-              url: 'http://localhost:9000/posts/Angular2',              
+              url: 'posts/Angular2',              
           },
           json: []
       };
@@ -57,9 +65,10 @@ function requestList($scope){
     }
     chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {        
         var status = document.querySelector("#status");
-        console.log(JSON.stringify(request, null, 5))
+        //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
         if(isJsonReq(request)){
             request.getContent(function(content, encoding) {
+                removeReferer(request);
                 request.json = angular.fromJson(content);
                 $scope.requests.push(request);
                 $scope.$apply();
