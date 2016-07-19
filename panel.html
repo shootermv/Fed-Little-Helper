@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="lib/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+<style>
+    .hidden { display: none }
+</style>
 <body ng-controller="requestList">
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
@@ -47,6 +50,7 @@
         </li>
     </ul>
     <a class="btn-floating btn-large waves-effect waves-light red" ng-click="addNewRequest()"><i class="material-icons">add</i></a>
+    <a id='save-all-btn' class="btn-floating btn-large waves-effect waves-light green" ng-click="saveAll()"><i class="material-icons">play_arrow</i></a>
 
 
     <!--modal-->
