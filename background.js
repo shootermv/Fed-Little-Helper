@@ -60,9 +60,6 @@ chrome.extension.onConnect.addListener(function (port) {
                 chrome.tabs.executeScript(message.tabId, {file: message.content});
 
                 //Pass message to inspectedPage
-            } else if (message.action === 'pause') {
-                proxy.stopListen();
-                //Pass message to inspectedPage
             } else {
                 //chrome.tabs.sendMessage(message.tabId, message, sendResponse);
                 console.log('message.content', message.content);
@@ -76,6 +73,9 @@ chrome.extension.onConnect.addListener(function (port) {
 
             // This accepts messages from the inspectedPage and 
             // sends them to the panel
+        }else if (message.tabId && message.action === 'pause') {
+            proxy.stopListen();
+            //Pass message to inspectedPage
         } else {
             port.postMessage(message);
         }

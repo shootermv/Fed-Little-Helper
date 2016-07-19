@@ -23,7 +23,7 @@ function removeReferer(request) {
 angular.module('devLittlehelper', []).controller('requestList', requestList);
 function requestList($scope) {
     $scope.requests = [];
-    
+
     $scope.reisterRequests = function () {
         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
         $scope.routerCode =
@@ -49,14 +49,14 @@ function requestList($scope) {
         $('#modal1').openModal();
     };
 
-    $scope.play = function(){
+    $scope.play = function () {
         console.log("playing");
         $scope.isPlaying = true;
         //proxy.start()
         sendObjectToInspectedPage({content: $scope.requests});
     }
 
-    $scope.stop = function(){
+    $scope.stop = function () {
         $scope.isPlaying = false;
         sendObjectToInspectedPage({action: 'pause'});
         //proxy.stop();
@@ -86,19 +86,28 @@ function requestList($scope) {
                 method: 'GET',
                 url: 'posts/Angular2'
             },
-            json: {"name": "vasya","family":"petrov"}
+            json: {"name": "vasya", "family": "petrov"}
         };
         $scope.requests.push(requestt);
     }
     chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {
-        if($scope.isPlaying) return;
+        if ($scope.isPlaying) return;
         var status = document.querySelector("#status");
         //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
         if (isJsonReq(request)) {
             request.getContent(function (content, encoding) {
-               // removeReferer(request);
+                // removeReferer(request);
                 request.json = angular.fromJson(content);
+                var found = false;
+                for (var i = 0, len = $scope.requests.length; i < len; i++){
+                    var req = scope.requests[i];
+                    if(req.request.url === request.request.url){
+                        found = true;
+                    }
+                }
+                if(found) return;
                 $scope.requests.push(request);
+
                 $scope.$apply();
             });
 
