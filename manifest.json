@@ -12,11 +12,14 @@
       "default_icon": "SantaLittleHelper.png"
     },
     "permissions": [
-        "webRequestBlocking",
-        "tabs", 
-        "webRequest",
+        "storage",
+        "cookies",
         "http://*/*",
-        "https://*/*"
+        "https://*/*",
+        "tabs",
+        "history",
+        "webRequest",
+        "webRequestBlocking"
     ],
     "manifest_version": 2
 }

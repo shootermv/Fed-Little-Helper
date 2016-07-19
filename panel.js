@@ -90,7 +90,7 @@ function requestList($scope) {
         //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
         if (isJsonReq(request)) {
             request.getContent(function (content, encoding) {
-                removeReferer(request);
+               // removeReferer(request);
                 request.json = angular.fromJson(content);
                 $scope.requests.push(request);
                 $scope.$apply();
