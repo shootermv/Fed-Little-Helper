@@ -20,10 +20,12 @@ class Proxy {
     }
 
     _onBeforeRequest(details){
+        console.log('details.url -',details.url)
         let url = details.url.toLowerCase();
         if (localStorage.hasOwnProperty(url)){
-            //return { redirectUrl: `data:application/json,${localStorage.getItem(url)}` };
-            return { redirectUrl: `data:application/json,{"val":4}` };
+            console.log('found!')
+            return { redirectUrl: `data:application/json,${localStorage.getItem(url)}` };
+            //return { redirectUrl: `data:application/json,{"val":4}` };
         }
 
 

@@ -13,7 +13,7 @@
 
                 <div>
                     <pre class="grey lighten-3" ng-if="!editing">{{request.json | json}}</pre>
-                    <textarea class="grey lighten-3" ng-if="editing" ng-model="request.json">{{request.json | json}}</textarea>
+                    <textarea class="grey lighten-3" ng-if="editing" ng-model="request.json" rows="3">{{request.json | json}}</textarea>
                 </div>
             </div>
 

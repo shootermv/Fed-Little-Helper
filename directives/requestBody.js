@@ -21,7 +21,7 @@ angular.module('devLittlehelper')
                 }
                 $scope.onEdit = function ($event) {
 
-                    $scope.request.json = JSON.stringify($scope.request.json);
+                    $scope.request.json = JSON.stringify($scope.request.json, null, 5);
                     $scope.editing = true;
                 };
                 $scope.onDone = function ($event) {
