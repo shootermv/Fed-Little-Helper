@@ -4,14 +4,14 @@
             <i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
             <i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
         </div>
-        <div ng-show="editing" class="input-field">
+        <div ng-show="editing">
             <select class="icons" ng-model="request.request.method">
                 <option value="GET" >GET</option>
                 <option value="POST">POST</option>
             </select>
         </div>
     </div>
-    <div class="col s9">
+    <div class="col s10">
         <span ng-if="!editing">{{request.request.url}}</span>
         <input type="text" ng-if="editing" ng-model="request.request.url">
     </div>
