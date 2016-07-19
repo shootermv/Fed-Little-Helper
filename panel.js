@@ -50,12 +50,17 @@ function requestList($scope) {
     };
 
     $scope.play = function(){
-         sendObjectToInspectedPage({content: $scope.requests});
+        console.log("playing");
+        $scope.isPlaying = true;
+        //proxy.start()
+        sendObjectToInspectedPage({content: $scope.requests});
     }
 
     $scope.stop = function(){
-
-    } 
+        $scope.isPlaying = false;
+        sendObjectToInspectedPage({action: 'pause'});
+        //proxy.stop();
+    }
 
 
     $scope.removeRequest = function (req, $event) {
@@ -86,6 +91,7 @@ function requestList($scope) {
         $scope.requests.push(requestt);
     }
     chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {
+        if($scope.isPlaying) return;
         var status = document.querySelector("#status");
         //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
         if (isJsonReq(request)) {
