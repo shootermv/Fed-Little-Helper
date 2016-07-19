@@ -35,4 +35,15 @@ Wait a minute! There is a way to do your job without be dependant on "real" serv
 
 You can use `Fed-Little-Helper` for quickly creating server wich serves mock json responses modified for your exact needs.
 
+Features
+===
+
+ * Learning curves - records requests-responses for future stand-alone usage
+ * Adding and editing requests and responses
+ * Using patterns for identifying requests [**future**]
+ * 2 modes for request interseption
+   * Opaque - whole server mock for stand alone development (regularly using previous communication recordings)
+   * Transparent - intercepts selected requests and returns specified responses [**future**]
+
+
  
