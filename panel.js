@@ -52,6 +52,19 @@ function requestList($scope){
           $event.preventDefault();
           $scope.requests.splice($scope.requests.indexOf(req), 1);
     }
+    
+    $scope.addNewRequest = function() {
+      let requestt = {
+          request:{
+              method: 'GET',
+              url: '/new-request',              
+          },
+          json: []
+      };
+      $scope.requests.push(requestt);
+    }  
+
+
 
     if(!chrome.devtools){//for run app inside browser (not as extension)
       let requestt = {
