@@ -21,7 +21,8 @@ chrome.extension.onConnect.addListener(function(port) {
 
                 //Pass message to inspectedPage
             } else {
-                chrome.tabs.sendMessage(message.tabId, message, sendResponse);
+                //chrome.tabs.sendMessage(message.tabId, message, sendResponse);
+                console.log('message.content',message.content)
             }
 
             // This accepts messages from the inspectedPage and 

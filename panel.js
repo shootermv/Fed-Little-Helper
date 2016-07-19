@@ -23,6 +23,7 @@ function removeReferer(request) {
 angular.module('devLittlehelper', []).controller('requestList', requestList);
 function requestList($scope) {
     $scope.requests = [];
+    
     $scope.reisterRequests = function () {
         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
         $scope.routerCode =
@@ -47,6 +48,15 @@ function requestList($scope) {
          `;
         $('#modal1').openModal();
     };
+
+    $scope.play = function(){
+         sendObjectToInspectedPage({content: $scope.requests});
+    }
+
+    $scope.stop = function(){
+
+    } 
+
 
     $scope.removeRequest = function (req, $event) {
         $event.preventDefault();
