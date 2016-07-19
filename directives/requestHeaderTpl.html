@@ -1,14 +1,31 @@
-<div class="row">
+<div class="row" ng-click="onHeaderClick($event)">
     <div class="col s1">
-        <i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
-        <i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
+        <div ng-if="!editing">
+            <i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
+            <i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
+        </div>
+        <div ng-show="editing" class="input-field">
+            <select class="icons" ng-model="request.request.method">
+                <option value="GET" >GET</option>
+                <option value="POST">POST</option>
+            </select>
+        </div>
     </div>
-    <div class="col s10">
-        {{request.request.url}}
+    <div class="col s9">
+        <span ng-if="!editing">{{request.request.url}}</span>
+        <input type="text" ng-if="editing" ng-model="request.request.url">
     </div>
     <div class="col s1">
-        <a href ng-click="onClick($event)">
+        <a href ng-click="onDelete($event)">
             <i class="material-icons right-align">close</i>
+        </a>
+    </div>
+    <div class="col s1">
+        <a href ng-click="onEdit($event)" ng-if="!editing">
+            <i class="material-icons right-align">edit</i>
+        </a>
+        <a href ng-click="onDone($event)" ng-if="editing">
+            <i class="material-icons right-align">check</i>
         </a>
     </div>
 </div>
