@@ -25,20 +25,7 @@
 
             <div class="collapsible-body">
 
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card darken-1" style="margin:10px">
-                            <div class="card-content">
-                                <span class="card-title">Json</span>
-                                <div>
-                                    <pre class="grey lighten-3">{{request.json | json}}
-                                    </pre>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <request-body request="request"></request-body>
 
                 <div class="row" ng-if="request.request.postData" style="margin:10px">
                     <div class="col s12">
@@ -87,5 +74,6 @@
 <script src="panel.js"></script>
 <script src="lib/js/materialize.js"></script>
 <script src="directives/requestHeaderDtv.js"></script>
+<script src="directives/requestBody.js"></script>
 </body>
 </html>
