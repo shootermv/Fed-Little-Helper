@@ -1,14 +1,14 @@
-<div class="row">	
+<div class="row">
     <div class="col s1">
         <i class="material-icons" ng-if="request.request.method==='GET'">call_received</i>
         <i class="material-icons" ng-if="request.request.method==='POST'">call_made</i>
     </div>
-    <div class="col s10">	
+    <div class="col s10">
         {{request.request.url}}
     </div>
     <div class="col s1">
         <a href ng-click="onClick($event)">
-            <i class="material-icons right-align">close</i>	
+            <i class="material-icons right-align">close</i>
         </a>
-    </div>	
+    </div>
 </div>
