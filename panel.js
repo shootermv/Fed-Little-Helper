@@ -71,7 +71,7 @@ function requestList($scope) {
                 method: 'GET',
                 url: 'posts/Angular2'
             },
-            json: []
+            json: {"name": "vasya","family":"petrov"}
         };
         $scope.requests.push(requestt);
     }

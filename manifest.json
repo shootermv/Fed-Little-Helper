@@ -12,7 +12,7 @@
       "default_icon": "SantaLittleHelper.png"
     },
     "permissions": [
-        
+        "webRequestBlocking",
         "tabs", 
         "webRequest",
         "http://*/*",
