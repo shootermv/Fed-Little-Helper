@@ -24,11 +24,12 @@ angular.module('devLittlehelper', []).controller('requestList', requestList);
 function requestList($scope) {
     $scope.requests = [];
 
+
     $scope.init = function() {
         addRequestHandler();
     }
 
-    
+
     $scope.reisterRequests = function () {
         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
         $scope.routerCode =
@@ -55,16 +56,17 @@ function requestList($scope) {
         $('#modal1').openModal();
     };
 
-    $scope.play = function(){
-         removeRequestHandler();        
-         sendObjectToInspectedPage({content: $scope.requests});
-         
+    $scope.stop = function(){
+        addRequestHandler();
+        $scope.isPlaying = false;
+        sendObjectToInspectedPage({action: 'pause'});        
     }
 
-    $scope.stop = function(){
-        //addRequestHandler();
-    } 
-
+    $scope.play = function () {     
+        $scope.isPlaying = true;
+        removeRequestHandler(); 
+        sendObjectToInspectedPage({content: $scope.requests});
+    }
 
     $scope.removeRequest = function (req, $event) {
         $event.preventDefault();
@@ -89,10 +91,11 @@ function requestList($scope) {
                 method: 'GET',
                 url: 'posts/Angular2'
             },
-            json: {"name": "vasya","family":"petrov"}
+            json: {"name": "vasya", "family": "petrov"}
         };
         $scope.requests.push(requestt);
     }
+
 
 
     //inner methods:
