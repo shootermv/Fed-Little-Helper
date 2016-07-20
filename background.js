@@ -25,6 +25,7 @@ class Proxy {
         this.enabled = false;
     }
 
+
     _onBeforeRequest(details) {
         if (!this.enabled) return;
         let url = details.url.toLowerCase();

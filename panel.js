@@ -17,12 +17,18 @@ function addTabsAtTheEnd(stringified) {
 
 function removeReferer(request) {
     let host = request.request.headers.find(header => header.name === "Referer");
-    request.request.url = request.request.url.replace(host.value, '/');
+    request.request._url = request.request.url.replace(host.value, '/');
 }
 
 angular.module('devLittlehelper', []).controller('requestList', requestList);
 function requestList($scope) {
     $scope.requests = [];
+
+
+    $scope.init = function() {
+        addRequestHandler();
+    }
+
 
     $scope.reisterRequests = function () {
         //sendObjectToInspectedPage({action: "script", content: "inserted-script.js"});
@@ -34,10 +40,11 @@ function requestList($scope) {
          `;
 
         $scope.requests.forEach(request => {
+            removeReferer(request)
             let stringified = addTabsAtTheEnd(JSON.stringify(request.json, null, '\t\t\t'));
             $scope.routerCode +=
                 ` 
-                router.get('${request.request.url}', function*() {                
+                router.get('${request.request._url}', function*() {                
                     this.body =  ${stringified};                   
                 });
             `;
@@ -49,19 +56,17 @@ function requestList($scope) {
         $('#modal1').openModal();
     };
 
-    $scope.play = function () {
-        console.log("playing");
+    $scope.stop = function(){
+        addRequestHandler();
+        $scope.isPlaying = false;
+        sendObjectToInspectedPage({action: 'pause'});        
+    }
+
+    $scope.play = function () {     
         $scope.isPlaying = true;
-        //proxy.start()
+        removeRequestHandler(); 
         sendObjectToInspectedPage({content: $scope.requests});
     }
-
-    $scope.stop = function () {
-        $scope.isPlaying = false;
-        sendObjectToInspectedPage({action: 'pause'});
-        //proxy.stop();
-    }
-
 
     $scope.removeRequest = function (req, $event) {
         $event.preventDefault();
@@ -90,29 +95,30 @@ function requestList($scope) {
         };
         $scope.requests.push(requestt);
     }
-    chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(request => {
-        if ($scope.isPlaying) return;
-        var status = document.querySelector("#status");
-        //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
-        if (isJsonReq(request)) {
-            request.getContent(function (content, encoding) {
-                // removeReferer(request);
-                request.json = angular.fromJson(content);
-                var found = false;
-                for (var i = 0, len = $scope.requests.length; i < len; i++){
-                    var req = scope.requests[i];
-                    if(req.request.url === request.request.url){
-                        found = true;
-                    }
-                }
-                if(found) return;
-                $scope.requests.push(request);
 
-                $scope.$apply();
-            });
 
-        }
-    });
+
+    //inner methods:
+    function requestHandler(request) {
+            var status = document.querySelector("#status");
+            //sendObjectToInspectedPage({action: "code", content: "console.log("+JSON.stringify(request, null, 5)+")"});
+            if (isJsonReq(request)) {
+                request.getContent(function (content, encoding) {
+                   // removeReferer(request);
+                    request.json = angular.fromJson(content);
+                    $scope.requests.push(request);
+                    $scope.$apply();
+                });
+
+            }
+    }
+    function addRequestHandler() {
+            chrome.devtools && chrome.devtools.network.onRequestFinished.addListener(requestHandler);
+    } 
+    function removeRequestHandler() {
+            chrome.devtools && chrome.devtools.network.onRequestFinished.removeListener(requestHandler); 
+    }
+
 
 }
 
