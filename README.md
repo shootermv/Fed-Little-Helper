@@ -47,7 +47,7 @@ Features
 
 ### Tech
 
-Dillinger uses a number of open source projects to work properly:
+Fed Little Helper uses a number of open source projects to work properly:
 
 * [AngularJS] - HTML enhanced for web apps!
 * [Materializecss] - Front-end framework based on Material Design
