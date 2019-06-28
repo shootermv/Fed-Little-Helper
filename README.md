@@ -25,7 +25,6 @@ Usage
 
 
 ### Background
-===
 
 Most of us familiar with follwoing situation: It is your first day at new place as Front End.  
 Teamleader explains you what need to be done.  
